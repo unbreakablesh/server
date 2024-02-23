@@ -1,0 +1,501 @@
+*{
+   margin: 0;
+   padding: 0;
+   text-decoration: none;
+   list-style: none;
+   color: black;
+   font-family: 'GmarketSans';
+   /*폰트*/
+}
+em{
+   font-style: normal;
+}
+#wrap {
+   width: 100%;
+
+}
+header{
+   /*width: 100%;*/
+   /*height: 200px;*/
+   /*!*background-color: #cff8cd;*!*/
+   /*background: linear-gradient(rgba(16, 1, 1, 0.11), rgb(21, 20, 20)),url("img/main.jpg");*/
+}
+nav{
+   /*width: 100%;*/
+   /*height: 70px;*/
+   background-color: #ffffff;
+   border-bottom:2px solid rgba(0,0,0,0.3);
+   border-top: 2px solid rgba(0,0,0,0.3);
+
+   /*position: fixed;*/
+   /*top: 0;*/
+   /*width: 100%;*/
+
+}
+/*네비타입*/
+.nav_inner{
+   width: 100%;
+   height: 70px;
+   display: flex;
+   align-items: center;
+   /*!*가운데로 글자 정렬*세로방향/*/
+   justify-content: space-between;
+   /*background-color: #b6f5b0;*/
+   padding: 0 20px;
+   /*패딩떔에 삐져나옴 패딩이 width 에 포함되서 40px이 삐져나옴*/
+   box-sizing: border-box;
+/*   이걸 해줘야 100% 안에서 패딩작업이 일어남*/
+
+
+}
+.nav__logo{
+   width: 15%;
+   font-size: 30px;
+   font-weight: 700;
+   /*background-color: #111;*/
+}
+.nav__logo em {
+   font-size: 18px;
+   font-weight: 400;
+}
+.nav__search{
+   width: 20%;
+   padding: 10px;
+}
+.nav__search input{
+   padding: 8px;
+   border-radius: 5px;
+   margin-left: -25px;
+}
+.nav__search .search{}
+.sch_btn{
+   padding:8px 2px;
+   border-radius: 5px;
+}
+
+s
+.nav__manu{
+   width: 50%;
+   text-align: center;
+   /*background-color: #555;*/
+
+}
+.nav__manu ul #red{
+   color: red;
+   font-size: 15px;
+   font-weight: bold;
+}
+.nav__manu ul li{
+   display: inline;
+}
+.nav__manu ul li a {
+   padding: 15px 25px;
+   margin: 0 5px;
+   border-radius: 10px;
+   transition: background-color 0.6s;
+
+}
+.nav__manu ul li a:hover{
+   background-color: rgba(215, 215, 215, 0.72);
+   border-radius: 10px;
+   /*transition: background-color 3s;*/
+   /*이건 바로없어짐*/
+}
+.nav__member{
+   /*width: 20%;*/
+   /*background-color: #999;*/
+   /*text-align: right;*/
+}
+.nav__member a{
+   border:3px solid black;
+   border-radius:50px ;
+   padding: 10px 30px;
+   background-color: #ffffff;
+
+}
+
+input[id="menuicon"]{
+   display: none;
+   padding-left: 30px;
+}
+input[id="menuicon"]+label{
+   display: block;
+   position: relative;
+   width: 60px;
+   height: 40px;
+   cursor: pointer;
+   z-index: 99;
+}
+input[id="menuicon"]+label span{
+
+   display: block;
+   position: absolute;
+   width: 100%;
+   height: 5px;
+   border-radius: 30px;
+   background-color: #090909;
+
+   transition: all .2s;
+}
+input[id="menuicon"]+label span:nth-child(1){top: 0}
+input[id="menuicon"]+label span:nth-child(2){
+   top: 50%;
+   transform: translateY(-50%);
+}
+input[id="menuicon"]+label span:nth-child(3){bottom: 0}
+
+input[id="menuicon"]:checked+label{
+   z-index: 99;
+}
+
+input[id="menuicon"]:checked+label span:nth-child(1){
+   top: 50%;
+   transform: translateY(-50%) rotate(45deg);
+   background-color: #ff0000;
+}
+input[id="menuicon"]:checked+label span:nth-child(2){
+
+   opacity: 0;
+}
+input[id="menuicon"]:checked+label span:nth-child(3){
+   top: 50%;
+   transform: translateY(-50%) rotate(-45deg);
+   background-color: #ff0000;
+}
+.sidebar{
+   width: 500px;
+   height: 100%;
+   background-color: rgba(141, 141, 141, 0.83);
+   position: fixed;
+   top: 72px;
+   right: -560px;
+   /*양쪽 패딩만큼 더*/
+   z-index: 90;
+   transition: all 0.35s;
+   padding: 30px;
+   display: grid;
+   grid-template-areas:
+
+      "cont1 cont2"
+      "cont3 cont2"
+      "cont3 cont4"
+      "cont5 cont5"
+;
+   grid-template-rows:200px 340px 150px 780px ;
+   grid-template-columns: 50% 50% ;
+
+}
+.sidebar_cont1{
+   grid-area: cont1;
+   width: 100%;
+   height: 100%;
+   padding: 30px;
+   text-align: center;
+   box-sizing: border-box;
+   /*패딩주니까 상자가 커짐. ㅡㅡ*/
+   background-color: #abbdfc;
+
+}
+.sidebar_cont2{
+   grid-area: cont2;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(243, 145, 145, 0.91);
+}
+
+
+.sidebar_cont3{
+   grid-area: cont3;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(224, 164, 248, 0.91);
+   
+
+}
+.sidebar_cont4{
+   grid-area: cont4;
+   width: 100%;
+   height: 100%;
+   background-color: #96fda2;
+}
+.sidebar_cont5{
+   grid-area: cont5;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(252, 217, 79, 0.87);
+}
+
+
+
+
+
+input[id="menuicon"]:checked+label+div{
+   right: 0;
+}
+
+
+main{
+   width: 100%;
+   position: relative;
+   /*height: 780px;*/
+   height: auto;
+   /*background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.6)),url("img/main.jpg");*/
+   background: linear-gradient(rgba(9, 9, 9, 0.95), rgba(21, 20, 20, 0.15)),url("img/main.jpg");
+   background-size: cover; /* 배경 이미지를 cover로 설정 */
+   background-position: center; /* 배경 이미지를 중앙에 정렬 */
+}
+
+
+.container {
+   width: 1200px;
+   height: inherit;
+   /*padding: 0 ;*/
+   margin: 0 auto;
+   /*background: rgb(255, 255, 255);*/
+
+}
+.contents{
+   /*margin: 0;*/
+   /*padding: 0;*/
+   display: grid;
+   grid-template-areas:
+      "cont0 cont0"
+      "cont1 cont1"
+      "cont2 cont2"
+      "cont3 cont4"
+   ;
+   grid-template-rows:200px 340px 1500px 780px ;
+   grid-template-columns: 50% 50% ;
+}
+.contents .cont0{
+   grid-area: cont0;
+   background-color: #fff;
+}
+
+
+.contents .cont1{
+   grid-area: cont1;
+   background-color: rgba(40, 39, 39, 0.22);
+   margin: 0;
+}
+.wrap_controler{
+   position: relative;
+   padding-top: 20px;
+}
+.multi_slide_wrap{
+   position: relative;
+   overflow: hidden;
+   width: 1200px;
+   height: 300px;
+   margin: 0 auto;
+}
+.multi_slides{
+   position: absolute;
+   /*width: 2610px;*/
+   /*이거 자바로 자동 계산식 만듬*/
+   left: 0;
+   top: 0;
+   transition: left 1s ease-out;
+   /*슬라이드 움직이는걸 보여줘  끝에 좀 느리게*/
+}
+.multi_slides li img{
+   width: 190px;
+   height: 300px;
+   border-radius: 20px;
+   background-size: cover;
+   background-position: center;
+}
+.multi_slides li:not(:last-child){
+   float: left;
+   margin-right: 12px;
+}
+.controls{
+   text-align: center;
+}
+.controls span{
+   background-color: rgba(253, 213, 2, 0.53);
+   position: absolute;
+   /*wrap_controler에 relative 되있음*/
+   padding: 30px 30px;
+   border-radius: 100px;
+   top: 50%;
+   transform: translateY(-50%);
+   /*완벽히 수직 으로 가운데 오게 하기위해서*/
+}
+
+
+.left{
+   background-color: rgba(255, 255, 255, 0);
+   position: absolute;
+   /*wrap_controler에 relative 되있음*/
+   top: 50%;
+   transform: translateY(-50%);
+   right:calc(92%);
+   z-index: 99;
+}
+.right{
+   background-color: rgba(255, 255, 255, 0);
+   position: absolute;
+   /*wrap_controler에 relative 되있음*/
+   top: 50%;
+   transform: translateY(-50%);
+   left:calc(92%);
+   z-index: 1;
+}
+
+
+
+
+.prev{
+   /*right:calc(100% - 100px);*/
+   right:calc(92%);
+   /*absolute 걸려있어야 의미있는 속성인듯*/
+}
+.next{
+   /*left:calc(100% - 100px);*/
+   left:calc(92% - 10px);
+}
+
+.contents .cont2{
+   grid-area: cont2;
+   background-color: rgba(66, 72, 80, 0.5);
+}
+.cont2{
+   /*overflow-y: scroll;*/
+}
+.cont2 h4{
+   font-size: 30px;
+   color: white;
+   font-weight: bold;
+   /*margin-bottom: 5px;*/
+   padding-left: 40px;
+   padding-top: 20px;
+   padding-bottom: 20px;
+}
+.cont2 ul{
+   /*overflow: hidden;*/
+   /*이유모름*/
+}
+.cont2 li{
+   float: left;
+   width: 20%;
+   margin-bottom: 5px;
+   margin-top: 5px;
+   text-align: center;
+}
+.cont2 li a{}
+.cont2 li a span{
+   position: relative;
+   /*em용*/
+   display: block;
+   width: 220px;
+   height: 300px;
+   /*그림 크기 늘리기전에 이거먼저 늘려야함*/
+   margin: 0 auto;
+   line-height:300px ;
+   /*이미지 전체적으로 가운데  em의 글씨를 가운데*/
+}
+.cont2 li a span img{
+   width: 220px;
+   height: 300px;
+   margin-bottom: 10px;
+   /*border-top-left-radius: 20px;*/
+   /*border-bottom-right-radius: 20px;*/
+   border-radius: 10px;
+}
+.cont2 li a span em{
+   position: absolute;
+   left: 0px;
+   top: 0px;
+   width: 100%;
+   height: 100%;
+   color: white;
+   /*border-top-left-radius: 20px;*/
+   /*border-bottom-right-radius: 22px;*/
+   border-radius: 10px;
+
+   display: none;
+   background-color: rgba(86, 81, 81, 0.67);
+}
+.cont2 li a span:hover em{
+   display: block;
+}
+.cont2 li a:hover strong{
+   color: #6d87ff;
+}
+
+.cont2 li a strong{
+   color: white;
+   display: block;
+   /*이게 꼭 필요*/
+   padding-top: 10px;
+
+}
+.contents .cont3{
+   grid-area: cont3;
+   background-color: rgba(231, 243, 236, 0.6);
+
+}
+.contents .cont4{
+   grid-area: cont4;
+   background-color: rgba(246, 188, 188, 0.96);
+
+}
+footer{
+   width: 100%;
+   height: 300px;
+   background-color: #2d312d;
+}
+/*미디어 쿼리*/
+@media (max-width: 1300px) {
+
+}
+@media (max-width: 768px) {
+
+}
+@media (max-width: 480px) {
+
+}
+/*slider*/
+#slider {
+   width: 100%;
+   height: 300px;
+   /*background-color: #d9d9d9;*/
+}
+
+.sliderWrap{
+   position: relative;
+}
+
+/*.sliderWrap > div {*/
+/*    display: none;*/
+/*}*/
+
+/*.sliderWrap > div:first-child {*/
+/*    display: block;*/
+/*}*/
+.sliderWrap .slider {
+   position: absolute;
+   left: 0;
+   top: 0;
+}
+.sliderWrap .slider {
+   vertical-align: top;
+   /*    이미지는 습관적으로 해야하는 옵션 */
+}
+.sliderWrap .slider span {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translateX(-50%) translateY(-50%);
+   /*완벽히 가운데 오기 위해서*/
+   background-color: rgb(0, 0, 0, 0.5);
+   padding: 10px 20px;
+   color: white;
+}
+
+
+/*!*자바스크립트용 css */
+.sliderWrap > div {
+   display: block;
+}

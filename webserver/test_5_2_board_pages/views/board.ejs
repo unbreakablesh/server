@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../board.css">
+<!--    //////////////////////////경로가 중요 !!!/////////////////-->
+<!--    -->
+<!--    -->
+
+</head>
+<body>
+<h1>게시판</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ff</th>
+        <th>ff</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+
+    <%  for( let i =0; i<writes.length; i++ ){ %>
+    <tr>
+        <td><%= writes[i][0]  %> </td>
+        <td><%= writes[i][1]  %> </td>
+    </tr>
+    <%   }   %>
+
+    </tbody>
+
+</table>
+
+<div>
+    <!-- currentPage가 1보다 크면 이전 링크로 이동할 수 있는 조건   -->
+    <!--  쿼리 파라메터(변수) 문법
+    url/?[쿼리파라메터1]=[쿼리파라메터1의 값1]&[쿼리파라메터2]=[쿼리파라메터2의 값2]&....[쿼리파라메터N]=[쿼리파라메터N의 값N]
+      -->
+    <!-- "/?page=[페이지번호] => 쿼리파라메터로 get 방식인 경우에 url에 파라메터 값을 지정하여 넘길 수 있다.   -->
+    <% if (currentPage > 1) { %>
+        <a href="/board/?pageee=<%= currentPage - 1 %>">이전</a>
+    <% } %>
+
+    <% for (let i = startPage; i <= endPage; i++) { %>
+        <% if (i === currentPage) { %>
+            <span class="current-page"><%= i %></span>
+        <% } else { %>
+            <a href="/board/?pageee=<%= i %>"><%= i %></a>
+        <% } %>
+    <% } %>
+
+    <!-- 현재 페이지에서 한 화면에 처리하는 페이지 갯수 보다 하나라도 더 많으면 다음 링크로 이동할 수 있는 조건   -->
+    <% if ( (totalPages - currentPage +1) > maxPageNumber ) { %>
+        <a href="/board/?pageee=<%= currentPage + 1 %>">다음</a>
+    <% } %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+*{
+    color: red;
+}
+
+.tab_boxs{
+    margin-top: 200px;
+    text-align: center;
+}
+
+input[type=radio]{
+    display: none;
+}
+input[type=radio]+label{
+    display: inline-block;
+    padding: 20px;
+    padding-right: 60px;
+    padding-left: 60px;
+    background-color: #a2e577;
+    font-size: 16px;
+    cursor: pointer;
+}
+input[type=radio]:checked+label.tab_1{
+    background-color: #8498e5;
+}
+input[type=radio]:checked+label.tab_2{
+    background-color: #7fe573;
+}
+input[type=radio]:checked+label.tab_3{
+    background-color: #f3dd63;
+}
+.log_in_box{
+    width: 600px;
+    height:300px ;
+    margin: 0 auto;
+    background-color: #f3de71;
+    display: none;
+}
+
+input[id=tab1]:checked ~ .box1{
+    display: block;
+    background-color: #8498e5;
+}
+input[id=tab2]:checked ~ .box2{
+    display: block;
+    background-color: #7fe573;
+}
+input[id=tab3]:checked ~ .box3{
+    display: block;
+    background-color: #f3dd63;
+}
+
+
+
+

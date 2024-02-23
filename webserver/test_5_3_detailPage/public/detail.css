@@ -1,0 +1,13 @@
+* {
+    color: red;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th{
+    border: 1px solid black;
+}
+td{
+    border: 1px solid black;
+    width: 400px;
+}
