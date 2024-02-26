@@ -1,0 +1,124 @@
+/**{*/
+/*    color: red;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+
+/*}*/
+/*header  {*/
+/*    width: 1000px;*/
+/*    height: 100px;*/
+/*    background-color: #f6c0c0;*/
+/*    margin: 0 auto;*/
+/*}*/
+/*nav{*/
+/*    width: 1000px;*/
+/*    height: 100px;*/
+/*    background-color: #a7c7fd;*/
+/*    margin: 0 auto;*/
+/*}*/
+/*.icon{*/
+/*    margin: 0 auto;*/
+/*    width: 500px;*/
+/*    height: 100px;*/
+/*    background-color: #fff;*/
+/*}*/
+
+/*#menuicon {*/
+/*    !*display: none;*!*/
+/*}*/
+
+/*#menuicon + label{}*/
+/*#menuicon + label span{}*/
+/*#menuicon + label span{}*/
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////////////*/
+
+
+input[id="menuicon"]{
+    display: none;
+}
+input[id="menuicon"]+label{
+    display: block;
+    position: relative;
+
+    width: 60px;
+    height: 40px;
+    cursor: pointer;
+}
+input[id="menuicon"]+label span{
+
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        border-radius: 30px;
+        background-color: #de0e0e;
+
+        transition: all .2s;
+}
+input[id="menuicon"]+label span:nth-child(1){top: 0}
+input[id="menuicon"]+label span:nth-child(2){
+    top: 50%;
+    transform: translateY(-50%);
+}
+input[id="menuicon"]+label span:nth-child(3){bottom: 0}
+
+input[id="menuicon"]:checked+label span:nth-child(1){
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+input[id="menuicon"]:checked+label span:nth-child(2){
+
+    opacity: 0;
+}
+input[id="menuicon"]:checked+label span:nth-child(3){
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+
+/*//////////////////////////////////////////////////////////*/
+
+
+
+
+/*#menuicon{*/
+/*    display: none;*/
+/*}*/
+
+/*input #manuicon + label{*/
+/*    display: block;*/
+/*    position: relative;*/
+/*    width: 60px;*/
+/*    height: 40px;*/
+/*    cursor: pointer;*/
+/*}*/
+/*input #manuicon + label span{*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 5px;*/
+/*    border-radius: 30px;*/
+/*    background-color: #0e0d0d;*/
+/*    transition: all .35s;*/
+/*}*/
+/*#menuicon*/
+
+main{
+    width: 1000px;
+    height: 700px;
+    background-color: #fa9999;
+    margin: 0 auto;
+}
+footer{
+    width: 1000px;
+    height: 100px;
+    background-color: #fa8b8b;
+    margin: 0 auto;
+}

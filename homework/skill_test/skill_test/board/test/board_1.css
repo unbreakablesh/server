@@ -1,0 +1,76 @@
+*{
+    /*color: red;*/
+    margin: 0 auto;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+table{
+
+}
+
+/*///////////////////////////////////*/
+
+
+.board_wrap{
+    /*padding: 100px;*/
+    width: 1000px;
+    padding: 100px;
+
+    background: transparent;
+    border: 2px solid black;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+
+
+
+
+    /*background-color: #e30b0b;*/
+
+}
+caption{
+    display: none;
+}
+
+.board{
+    width: 100%;
+    border-top: 3px solid red;
+}
+.board tr{
+    border-bottom: 1px solid black;
+}
+
+.board th, td{
+    /*border: 1px solid black;*/
+    padding: 10px;
+}
+
+.board td{
+    text-align: center;
+}
+.board tbody tr .tit{
+    text-align: left;
+}
+.board tbody tr .tit:hover{
+    text-decoration: underline;
+}
+
+.paging{
+    margin-top: 10px;
+    font-size: 0;
+    text-align: center;
+}
+.paging a {
+    display: inline-block;
+    /*그냥 인라인과 무슨차이?*/
+    border: 1px solid black;
+    font-size: 20px;
+    margin-left: 10px;
+    padding:5px 10px;
+    border-radius: 100px;
+
+}
+.paging a:first-child {
+    margin-left: 0;
+}

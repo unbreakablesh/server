@@ -1,0 +1,268 @@
+*{
+    color: black;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.tab_boxs{
+    width: 1000px;
+    /*margin-top: 200px;*/
+    padding-top: 100px;
+
+}
+
+input[type=radio]{
+    display: none;
+}
+input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    width: 250px;
+    box-sizing: border-box;
+    height: 70px;
+    line-height: 70px;
+    border-bottom: 1px solid black;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 30px;
+    vertical-align: top;
+    /*핵심*/
+    opacity: 40%;
+    background-color: #ffffff;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+
+}
+
+input[type=radio]:checked+label.tab_1{
+    background-color: rgba(255, 255, 255, 0.2);
+    border-top: 5px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+    opacity: 100%;
+}
+input[type=radio]:checked+label.tab_2{
+    background-color: rgba(212, 253, 206, 0.2);
+    border-top: 5px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom: 1px solid rgba(212, 253, 206, 0.2);
+    opacity: 100%;
+}
+input[type=radio]:checked+label.tab_3{
+    background-color: #fdf3bd;
+    border-top: 5px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom: 1px solid #fdf3bd;
+    opacity: 100%;
+}
+
+input[id=tab1]:checked ~ .box1{
+    display: block;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    box-sizing: border-box;
+}
+input[id=tab2]:checked ~ .box2{
+    display: block;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    background-color: rgba(212, 253, 206, 0.2);
+}
+input[id=tab3]:checked ~ .box3{
+    display: block;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    background-color:  #fdf3bd;
+}
+
+/*///////////////////탭 아래박스 내용//////////////////////*/
+.log_in_box{
+    width: 100%;
+    height:700px ;
+    margin: 0 auto;
+    background-color: #f3de71;
+    display: none;
+}
+
+ .material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 20,
+             'wght' 500,
+             'GRAD' 200,
+             'opsz' 20
+ }
+
+ .material-symbols-outlined {
+     font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 24
+ }
+
+ /*아이콘*/
+
+
+.box1{
+    justify-content: center;
+    align-items: center;
+    /*min-height: 100vh;*/
+    /*background-color: #e33f3f;*/
+    text-align: center;
+}
+.log_in_wrap{
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*!*min-height: 100vh;*!*/
+    /*background-color: #e33f3f;*/
+
+    width: 400px;
+    /*background-color: #ef9d9d;*/
+    padding-top: 100px;
+
+
+}
+#log_form{
+    background-color: #7089f8;
+    background: transparent;
+    border: 2px solid black;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    /*padding-bottom: 20px;*/
+    padding: 50px 50px 50px 50px;
+}
+
+
+.log_in_wrap h1{
+    font-size: 50px;
+}
+.input_box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    /*background: #021ca1;*/
+    margin: 30px 0;
+
+
+}
+.input_box input{
+    width: 100%;
+    height: 100%;
+    background: rgba(182, 25, 169, 0);
+    border: 2px solid #0c0c0c;
+    outline: none;
+    border-radius: 40px;
+    padding-left: 20px;
+    font-size: 20px;
+
+}
+.input_box input::placeholder{
+    color: #bdb5b5;
+    /*padding-left: 20px;*/
+    font-size: 20px;
+
+
+}
+.input_box span{
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    /*color: white;*/
+
+}
+
+
+.auto_find{
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: 30px;
+
+}
+.submit_box button{
+    width: 100%;
+    height: 50px;
+    background-color: #b0a0a0;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+
+
+.auto_find a:hover{
+    text-decoration: underline;
+    color: red;
+}
+.new{
+    margin: 20px;
+
+}
+.new label:hover{
+    text-decoration: underline;
+    color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
