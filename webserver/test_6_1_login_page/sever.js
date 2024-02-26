@@ -12,8 +12,8 @@ app.get('/home', (req, res) => {
    res.render('home')
 });
 
-app.get('/log_in', (req, res) => {
-   res.render('log_in')
+app.get('/login', (req, res) => {
+   res.render('login')
 });
 
 const bodyParser = require('body-parser');
@@ -178,6 +178,7 @@ app.get('/detailPage/:iddd',async (req, res)=>{
 
 } );
 
+///////////// 로그인페이지 이식 //////
 
 //////////////////// 몬가 이거가지고 로그인 파악하는거 같음 !!!!?????////
 // 로그인이 안되면  암것도 못하게 만들어야함
@@ -185,4 +186,4 @@ app.get('/detailPage/:iddd',async (req, res)=>{
 //    return res.redirect('/login'); // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
 // }
 
-const session = require('express-session');
+// const session = require('express-session');
