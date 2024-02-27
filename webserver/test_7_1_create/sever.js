@@ -213,26 +213,62 @@ app.get('/detailPage/:iddd',async (req, res)=>{
 
 } );
 
-///////////// 로그인페이지 이식 //////
 
-//////////////////// 몬가 이거가지고 로그인 파악하는거 같음 !!!!?????////
-// 로그인이 안되면  암것도 못하게 만들어야함
-// if (!req.session.loggedIn) {
-//    return res.redirect('/login'); // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-// }
-
-// const session = require('express-session');
-
-// app.use(session({
-//    secret: 'mySecretKey', // 세션을 암호화하기 위한 임의의 키
-//    resave: false,
-//    saveUninitialized: true ,   //모든 세션 정보 버장
-//    //세션의 유지 시간은 기본값은 브라우저 종료시까지 유지
-//    // cookie:{
-//    //    maxAge: 35000 //단위는 밀리세컨드
-//    //
-//    // }
-// }));
+//////////////////////////////////////////////////////////////////
+///////////// 글작성  이식 ////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 
-// 위 에 코드에 추가  표시해놓겠음  위치에 따라 되고안되고 해서  위에 넣을수 밖에 없었음 ㅜㅠㅠㅠㅠ
+app.get('/writing', (req, res) => {
+   res.render('writing')
+   // 페이지 가저옴
+});
+
+
+app.post('/www', async (req, res) => {
+
+//작성 페이지에서  form의  액션이 www  인거임 !!  1번
+   const { title, content } = req.body;
+// 바디에서 가져온걸  저 변수에 집어넣음 2번
+   let conn;
+   try {
+      conn = await oracledb.getConnection(dbConfig);
+
+      // 게시글을 위한 시퀀스에서 새로운 ID 가져오기
+      const result = await conn.execute(
+          `SELECT board_seq.NEXTVAL FROM DUAL`
+          // 새글의 다음 번호 부여해주기위해서
+      );
+      const postId = result.rows[0][0];
+      //새로만들 글의 번호 (아이디)를 변수에 담음 3번
+
+      // 게시글 삽입
+      await conn.execute(
+          `INSERT INTO board (id, title, author) VALUES (:id, :title, :content)`,
+          [postId, title, content]
+          //1 2 3번을 통해서 가져온 변수흫  데이버베이스에  넣어주는 쿼리 논리적으로는 이해가 안가서 존나 짜증남
+          //SELECT board_seq.NEXTVAL FROM DUAL  에서 새글의 번호를 지정하여 result에 넣고
+          // 그걸 postId에 넣고  그걸 :i에 넣고 그걸 데이터베이스 테이블의 id컬럼에 넣어줌
+          //
+      );
+
+
+      // 게시글 작성 후 게시판 메인 페이지로 리다이렉트
+      res.redirect('/board');
+   } catch (err) {
+      console.error('글 작성 중 오류 발생:', err);
+      res.status(500).send('글 작성 중 오류가 발생했습니다.');
+   } finally {
+      if (conn) {
+         try {
+            await conn.close();
+         } catch (err) {
+            console.error('오라클 연결 종료 중 오류 발생:', err);
+         }
+      }
+   }
+
+
+
+
+});

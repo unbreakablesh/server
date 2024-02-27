@@ -52,20 +52,13 @@ selectDatabase222()
 
 
 
-///////////////////////////////////////////////////////////////////////////
 const session = require('express-session')
 
 app.use(session({
    secret: 'mySecretKey', // 세션을 암호화하기 위한 임의의 키
    resave: false,
    saveUninitialized: false,   //모든 세션 정보 버장
-   //세션의 유지 시간은 기본값은 브라우저 종료시까지 유지
-   // cookie:{
-   //    maxAge: 5000 //단위는 밀리세컨드
-   //
-   // }
 }));
-////////////////////////////////////////////////////////////////////////////
    app.post('/test', async (req, res) => {
    const {nickname, password } = req.body;
    const authenticateuser = await varifyID(nickname,password)
@@ -73,13 +66,9 @@ app.use(session({
 
    if (authenticateuser){
 
-//////////////////////////////////////////////////////////////////////
       req.session.loggedIn = true; // 세션에 loggedIn 이라는 변수 생성및 초기화
       req.session.username = nickname;
-   ///////////////////////////////////////////////////////////////////////
 
-
-      // res.render('welcome',{nickname});
       res.render('home',{nickname});
    }else {
       res.render('welcome',{nickname})
@@ -197,10 +186,8 @@ app.get('/detailPage/:iddd',async (req, res)=>{
    const result = await conn.execute(
        'select * from board where id = :iddd ',
        {'iddd':postId}
-
    )
    console.log(result.rows[0])
-
 
    res.render('detail',{
       detail_contttt : {
@@ -208,31 +195,109 @@ app.get('/detailPage/:iddd',async (req, res)=>{
          'id' : result.rows[0][0],
          'author' : result.rows[0][2]
          }
-
    })
-
 } );
 
-///////////// 로그인페이지 이식 //////
+app.get('/writing', (req, res) => {
+   res.render('writing')
+});
 
-//////////////////// 몬가 이거가지고 로그인 파악하는거 같음 !!!!?????////
-// 로그인이 안되면  암것도 못하게 만들어야함
-// if (!req.session.loggedIn) {
-//    return res.redirect('/login'); // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-// }
+app.post('/www', async (req, res) => {
 
-// const session = require('express-session');
+   const { title, content } = req.body;
+   let conn;
+   try {
+      conn = await oracledb.getConnection(dbConfig);
 
-// app.use(session({
-//    secret: 'mySecretKey', // 세션을 암호화하기 위한 임의의 키
-//    resave: false,
-//    saveUninitialized: true ,   //모든 세션 정보 버장
-//    //세션의 유지 시간은 기본값은 브라우저 종료시까지 유지
-//    // cookie:{
-//    //    maxAge: 35000 //단위는 밀리세컨드
-//    //
-//    // }
-// }));
+      const result = await conn.execute(
+          `SELECT board_seq.NEXTVAL FROM DUAL`
+      );
+      const postId = result.rows[0][0];
+      await conn.execute(
+          `INSERT INTO board (id, title, author) VALUES (:id, :title, :content)`,
+          [postId, title, content]
+      );
 
 
-// 위 에 코드에 추가  표시해놓겠음  위치에 따라 되고안되고 해서  위에 넣을수 밖에 없었음 ㅜㅠㅠㅠㅠ
+      // 게시글 작성 후 게시판 메인 페이지로 리다이렉트
+      res.redirect('/board');
+   } catch (err) {
+      console.error('글 작성 중 오류 발생:', err);
+      res.status(500).send('글 작성 중 오류가 발생했습니다.');
+   } finally {
+      if (conn) {
+         try {
+            await conn.close();
+         } catch (err) {
+            console.error('오라클 연결 종료 중 오류 발생:', err);
+         }
+      }
+   }
+
+});
+
+//////////////////////////////////////////////////////////////////
+///////////// edit 이식 ////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+app.get('/edit/:id', async (req, res) => {
+// 수정 페이지 렌더링
+   const postId = req.params.id;
+
+   let conn
+   conn = await oracledb.getConnection(dbConfig);
+
+   const result = await conn.execute(
+       'select * from board where id = :id ',
+       {'id':postId}
+   )
+
+   res.render('edit',{
+      edit_conmnm : {
+         'title' : result.rows[0][1],
+         'id' : result.rows[0][0],
+         'author' : result.rows[0][2]
+      }
+   })
+
+});
+
+app.post('/editafter/:idpppp',async(req,res)=>{
+
+  const { title, content } = req.body;
+   // title content는 임의로 지정한거 저 변수에 담아서 나중에 넣으려는거임
+   ///중요한거는  input  안에  name에   name = title name = content  두개가  꼭 있어야함  존나 오래 찾음
+   const postId = req.params.idpppp;
+
+   let conn;
+   try {
+   conn = await oracledb.getConnection(dbConfig);
+
+
+   // 게시글 수정
+   await conn.execute(
+       `UPDATE board SET title = :title, author = :contentttttt WHERE id = :id`,
+       // 이쿼리에 대한 이해만  높히자  contentttttt : content
+       [title, content, postId]
+   );
+   // res.render('board')
+      //랜더는 안됨  아래 두개는 됨 !!
+   // res.redirect('/board')
+   res.redirect(`/detailPage/${postId}`);
+   } catch (err) {
+      console.error('게시글 수정 중 오류 발생:', err);
+      res.status(500).send('게시글 수정 중 오류가 발생했습니다.');
+   } finally {
+      if (conn) {
+         try {
+            await conn.close();
+         } catch (err) {
+            console.error('오라클 연결 종료 중 오류 발생:', err);
+         }
+      }
+   }
+
+   // await conn.commit();
+// 안해도 되는듯
+
+});
