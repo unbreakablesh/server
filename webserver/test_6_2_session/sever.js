@@ -73,11 +73,18 @@ app.use(session({
 
    if (authenticateuser){
 
-//////////////////////////////////////////////////////////////////////
+/////////////////////////////입장권!!!!!!/////////////////////////////////////////
       req.session.loggedIn = true; // 세션에 loggedIn 이라는 변수 생성및 초기화
       req.session.username = nickname;
-   ///////////////////////////////////////////////////////////////////////
 
+   //   로그인을  하면서 유저 정보에 접속을 하게 되면 싹다 sesseion에
+      // 넣어서 보관해 두면 나중에 쓰기 편해짐  개꿀 개꿀
+
+
+   ///////////////////////////////////////////////////////////////////////
+//req.session.loggedIn은 사용자가 로그인했는지 여부를 추적하기 위한 세션 변수
+      //authenticateuser가 true인 경우(사용자의 닉네임과 비밀번호가 성공적으로 확인된 경우),
+      // 코드는 req.session.loggedIn을 true로 설정하고 또한 세션에 nickname을 req.session.username으로 저장
 
       // res.render('welcome',{nickname});
       res.render('home',{nickname});
