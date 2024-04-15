@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 
-app.listen(3000,()=>{
-   console.log('서버열림 : http://localhost:3000/webnovel')
+app.listen(3003,()=>{
+   console.log('서버열림 : http://localhost:3003/webnovel')
 });
 
 app.get('/webnovel',(req,res)=>{

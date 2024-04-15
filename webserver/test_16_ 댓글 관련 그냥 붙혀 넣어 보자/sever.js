@@ -206,6 +206,10 @@ app.get('/detailPage/:iddd', async (req, res) => {
 
    const postId123 = req.params;
    const postId = req.params.iddd;
+   const userName = req.session.username
+   const userId = req.session.loggedInUserId
+   const userRealName = req.session.loggedRealName
+
 
    console.log(postId123);
    console.log(postId);
@@ -302,7 +306,12 @@ app.get('/detailPage/:iddd', async (req, res) => {
          'date' :  result.rows[0][6]
       },
       // post: post,
-      comments: comments
+      comments: comments,
+       userName :userName,
+       userId : userId,
+       userRealName : userRealName
+
+
    })
 });
 
@@ -325,6 +334,9 @@ app.post('/addComment', async (req, res) => {
    const author_id = req.session.loggedInUserId;
    const comment_id = req.body.comment_id; // req.body에서 comment_id를 가져옴
    const { content } = req.body;
+   console.log('댓글달리는거확인용')
+   console.log(post_id)
+   console.log(comment_id)
 
    let conn;
    try {
@@ -339,7 +351,7 @@ app.post('/addComment', async (req, res) => {
 
       await conn.commit();
 
-      res.redirect(`/detailPost/${post_id}`);
+      res.redirect(`/detailPage/${post_id}`);
    } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
@@ -349,6 +361,45 @@ app.post('/addComment', async (req, res) => {
             await conn.close();
          } catch (err) {
             console.error(err);
+         }
+      }
+   }
+});
+
+////////////댓글 삭제/////////////
+app.post('/deleteComment/:id', async (req, res) => {
+   // 로그인 여부 확인
+   if (!req.session.loggedIn) {
+      return res.redirect('/login'); // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+   }
+
+   const commentId = req.params.id;
+   const postId = req.body.post_id;
+
+   let conn;
+   try {
+      conn = await oracledb.getConnection(dbConfig);
+
+      // 댓글 삭제
+      await conn.execute(
+          `DELETE FROM review_comments WHERE id = :id OR parent_comment_id = :parent_comment_id`,
+          { id: commentId, parent_comment_id: commentId }
+      );
+
+      // 변경 사항 커밋
+      await conn.commit();
+
+      // 삭제 후 상세 페이지로 리다이렉트
+      res.redirect(`/detailPage/${postId}`);
+   } catch (err) {
+      console.error('댓글 삭제 중 오류 발생:', err);
+      res.status(500).send('댓글 삭제 중 오류가 발생했습니다.');
+   } finally {
+      if (conn) {
+         try {
+            await conn.close();
+         } catch (err) {
+            console.error('오라클 연결 종료 중 오류 발생:', err);
          }
       }
    }
